@@ -52,6 +52,7 @@ podTemplate(
         stage ('Deploy') {
             container ('helm') {
                 sh "/helm init --client-only --skip-refresh"
+		sh "kubectl cluster-info"
                 sh "/helm upgrade --install --wait --set image.repository=nishantchauhan/hcl-test,image.tag=${commitId} hello hello"
             }
         }
